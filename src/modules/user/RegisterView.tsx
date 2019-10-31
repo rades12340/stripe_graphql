@@ -3,13 +3,17 @@ import { gql } from "apollo-boost";
 import * as React from "react";
 import { Register, RegisterVariables } from "src/schemaTypes";
 
+interface Props {
+  history: any;
+}
+
 const REGISTER_USER = gql`
   mutation Register($email: String!, $password: String!) {
     register(email: $email, password: $password)
   }
 `;
 
-const RegisterView: React.FC = props => {
+const RegisterView: React.FC<Props> = ({ history }) => {
   const [user, setUser] = React.useState({ email: "", password: "" });
   const [register, { data }] = useMutation<Register, RegisterVariables>(
     REGISTER_USER
@@ -27,6 +31,7 @@ const RegisterView: React.FC = props => {
       variables: { email: user.email, password: user.password }
     });
     setUser({ email: "", password: "" });
+    history.push("/login");
   };
 
   console.log(data);

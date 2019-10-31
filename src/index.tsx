@@ -7,7 +7,7 @@ import "./index.css";
 import registerServiceWorker from "./registerServiceWorker";
 
 const client = new ApolloClient({
-  credentials: "same-origin",
+  credentials: "include",
   uri: "http://localhost:4000/graphql"
 });
 
